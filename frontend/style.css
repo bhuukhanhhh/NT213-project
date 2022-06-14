@@ -1,0 +1,55 @@
+footer {
+    background-color: #101010;
+    color: #9d9d9d;
+    padding: 5px;
+}
+
+header {
+    background-color: #101010;
+}
+
+.errcontainer {
+    font-size: 14px;
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.err {
+    margin: 5px 0;
+    color: #e74c3c;
+}
+
+.err ul {
+    /* list-style-type: none; */
+    margin: 0;
+    padding-inline-start: 2em;
+}
+
+#bannerImage {
+    padding-top: 75px;
+    padding-bottom: 230px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background-image: url('../images/thumbnail/online-shopping1.jpg');
+    background-size: cover;
+}
+
+#bannerContent {
+    position: relative;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    margin-top: 15%;
+    margin-bottom: 20%;
+    background-color: rgba(83, 80, 80, 0.7);
+    max-width: 660px;
+}
+
+.getFeedback-box i {
+    font-size: small;
+    color: #282828;
+}
+
+.getFeedback-box p {
+    font-size: large;
+}
