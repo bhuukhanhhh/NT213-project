@@ -549,9 +549,11 @@ function remove_product(item_id, nums) {
                                 icon: "success",
                                 text: "Remove successfully!",
                                 confirmButtonColor: "#337ab7"
-                            });
-                            window.location.href = "cart.php";
-                            //display_user_cart();
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "cart.php";
+                                }
+                            })
                             break;
                         case '1':
                             Swal.fire({
@@ -592,8 +594,11 @@ function remove_product(item_id, nums) {
                                 icon: "success",
                                 text: "Remove successfully!",
                                 confirmButtonColor: "#337ab7"
-                            });
-                            display_user_cart();
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "cart.php";
+                                }
+                            })
                             break;
                         case '1':
                             Swal.fire({
