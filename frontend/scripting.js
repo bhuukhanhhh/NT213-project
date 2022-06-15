@@ -420,6 +420,7 @@ function display_user_cart() {
                     var item_price = response[i]['price'];
                     var item_quantity = response[i]['quantity'];
                     var item_number = i + 1;
+                    var uid = response[i]['uid'];
 
                     var each_item = "<tr><th scope='row'>" + item_number + "</th>"
                         + "<td>" + item_name + "</td>"
@@ -433,7 +434,8 @@ function display_user_cart() {
                     total_price = total_price + (item_price * item_quantity);
                     if (i == response.length - 1) {
                         var total_row = "<tr><th colspan='2'><center>Total Price:</center></th>"
-                            + "<th colspan='3' text-align: left;'><span>&#36;</span>" + total_price + "</th></tr>";
+                            + "<th colspan='2' text-align: left;'><span>&#36;</span>" + total_price + "</th>"
+                            + "<th><div class='btn btn-primary' onclick='check_out(" + uid + ");'>Confirm Order</div></th></tr>";
                         list_cart.append(total_row);
                     }
                 }
@@ -664,5 +666,53 @@ function display_products() {
                 break;
         }
     });
+}
+
+// checkout.php (confirm customer's order)
+function check_out(uid) {
+    var get_token = document.getElementById('csrf_token');
+    Swal.fire({
+        title: "Confirmation",
+        text: "You want to buy all these products?",
+        icon: "info",
+        confirmButtonColor: "#337ab7",
+        showCancelButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("php/cart_confirm.php?uid=" + uid, $(get_token).serialize(), function (response) {
+                switch (response) {
+                    case '0':
+                        window.location.href = "checkout.php";
+                        break;
+                    case '1':
+                        Swal.fire({
+                            title: "Error",
+                            text: "Something wrong has happened! Please try again.",
+                            icon: "error",
+                            confirmButtonColor: "#337ab7"
+                        });
+                        break;
+                    case '2':
+                        Swal.fire({
+                            title: "Error",
+                            text: "There is missing something, we can't confirm your order. Please try again.",
+                            icon: "error",
+                            confirmButtonColor: "#337ab7"
+                        });
+                        break;
+                    case '3':
+                        Swal.fire({
+                            title: "Error",
+                            text: "It's our fault, we will fix this later. Sorry for this inconvenience.",
+                            icon: "error",
+                            confirmButtonColor: "#337ab7"
+                        });
+                        break;
+                }
+            });
+        }
+    })
+
+
 }
 

@@ -25,9 +25,9 @@ if ($_SESSION['logged_in'] == false) {
                 $user_id = mysqli_real_escape_string($conn, $_SESSION['id']);
                 $item_id = mysqli_real_escape_string($conn, $_GET['iid']);
 
-                $select_duplicated_product_in_cart = sql_select($conn, "SELECT * FROM user_cart WHERE user_id=? AND product_id=? AND quantity >= 1", "ss", $user_id, $item_id);
+                $select_duplicated_product_in_cart = sql_select($conn, "SELECT * FROM user_cart WHERE user_id=? AND product_id=? AND quantity >= 1 AND status=?", "sss", $user_id, $item_id, "Added to cart");
                 if ($select_duplicated_product_in_cart->num_rows != 0) {
-                    $increase_quantity = sql_update($conn, "UPDATE user_cart SET quantity=quantity+1 WHERE user_id=? AND product_id=? AND quantity >= 1", "ss", $user_id, $item_id);
+                    $increase_quantity = sql_update($conn, "UPDATE user_cart SET quantity=quantity+1 WHERE user_id=? AND product_id=? AND quantity >= 1 AND status=?", "sss", $user_id, $item_id, "Added to cart");
                     if ($increase_quantity) {
                         // [not an error] add the same product to cart successfully
                         echo 0;

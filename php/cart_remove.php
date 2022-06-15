@@ -46,17 +46,6 @@ if ($_SESSION['logged_in'] == false) {
                 } else {
                     // error
                 }
-
-                /* $delete_item = sql_delete($conn, "DELETE FROM users_items WHERE user_id=? AND item_id=?", "ss", $user_id, $item_id);
-                if ($delete_item) {
-                    // [not an error] remove product out of cart successfully
-                    echo 0;
-                } else {
-                    unset($item_id);
-                    unset($user_id);
-                    // [Error 1] cannot delele product --> something wrong has happened
-                    echo 1;
-                } */
             } else {
                 // [Error 1] cannot connect to database --> something wrong has happened
                 echo 1;
